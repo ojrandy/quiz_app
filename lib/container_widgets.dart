@@ -1,29 +1,39 @@
 import 'package:flutter/material.dart';
 
 class ContainerWidgets extends StatelessWidget {
-  const ContainerWidgets({super.key});
+  const ContainerWidgets(this.startQuiz, {super.key});
 
+  final void Function() startQuiz;
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: const BoxDecoration(color: Colors.pinkAccent),
-      // Container with a pink background color
-      child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Image.asset(
-              'assets/images/quiz-logo.png',
-              width: 200,
-              height: 200,
-              color: Colors.black87,
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Image.asset(
+            'assets/images/quiz-logo.png',
+            width: 200,
+            height: 200,
+            color: const Color.fromARGB(111, 238, 4, 4),
+          ),
+          const SizedBox(height: 50),
+          Text(
+            "Learning without limitations",
+            style: TextStyle(
+              fontSize: 25,
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
             ),
-            const SizedBox(height: 20),
-            Text("Get Started with Flutter Quiz"),
-            TextButton(onPressed: () {}, 
-            child: const Text("Start Quiz >>")),
-          ],
-        ),
+          ),
+          const SizedBox(height: 30),
+          OutlinedButton.icon(
+            onPressed: () {
+              startQuiz();
+            },
+            label: const Text("Start Quiz", style: TextStyle(fontSize: 22)),
+            icon: Icon(Icons.arrow_right_alt, size: 30, color: Colors.white),
+          ),
+        ],
       ),
     );
   }
