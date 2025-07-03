@@ -18,6 +18,7 @@ class AnswerButton extends StatelessWidget {
         foregroundColor: Colors.white,
         textStyle: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+        alignment: Alignment.center,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
       ),
       onPressed: onTap,

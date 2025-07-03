@@ -15,6 +15,7 @@ class Quiz extends StatefulWidget {
 
 class _QuizState extends State<Quiz> {
   List<String> selectedAnswer = [];
+
   // Variable to track the active screen
   var activeScreen = "screen_one";
 
@@ -30,11 +31,17 @@ class _QuizState extends State<Quiz> {
     if (selectedAnswer.length == questions.length) {
       // If all answers are selected, switch back to the first screen
       setState(() {
-        selectedAnswer = [];
         activeScreen = "result_screen";
-        selectedAnswer.clear(); // Clear the answers for the next round
       });
     }
+  }
+
+  // Function to restart the quiz
+  void restartQuiz() {
+    setState(() {
+      selectedAnswer = [];
+      activeScreen = "screen_one";
+    });
   }
 
   @override
@@ -43,8 +50,16 @@ class _QuizState extends State<Quiz> {
         ? ContainerWidgets(switchScreen)
         : QuizQuestion(onAnswerSelected: chooseAnswer);
 
+    // If the active screen is the result screen, show the ResultScreen widget
+    if (activeScreen == "screen_two") {
+      screenWidget = QuizQuestion(onAnswerSelected: chooseAnswer);
+    }
+    // If the active screen is the result screen, show the ResultScreen widget
     if (activeScreen == "result_screen") {
-      screenWidget = ResultScreen(selectedAnswer);
+      screenWidget = ResultScreen(
+        chosenAnswers: selectedAnswer,
+        restartQuiz: restartQuiz,
+      );
     }
 
     return MaterialApp(
